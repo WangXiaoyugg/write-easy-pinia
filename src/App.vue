@@ -3,8 +3,9 @@ import { useCounterStore1 } from './stores/counter1';
 import { useCounterStore2 } from './stores/counter2';
 
 const store1 = useCounterStore1();
+const { increment } = store1;
 const handleClick1 = () => {
-  store1.increment(3)
+  increment(3)
 }
 
 const store2 = useCounterStore2();
