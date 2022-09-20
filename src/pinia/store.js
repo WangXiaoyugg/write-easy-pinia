@@ -41,7 +41,8 @@ function createOptionsStore(id, options, pinia) {
             Object.keys(getters || {}).reduce((memo, name) => {
                 memo[name] = computed(() => {
                    const store = pinia._s.get(id)
-                   return getters[name].call(store, state());
+                //    console.log(store, localState);
+                   return getters[name].call(store, store);
                 })
                 return memo;
             }, {})
@@ -72,7 +73,6 @@ export function defineStore(idOrOptions, setup) {
     function useStore() {
         const instance = getCurrentInstance();
         const pinia = instance && inject(piniaSymbol);
-        console.log('pinia: ', pinia);
         if (!pinia._s.has(id)) {
             if (isSetup) {
                 createSetupStore(id, setup, pinia)
